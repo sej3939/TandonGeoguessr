@@ -1,0 +1,772 @@
+--
+-- Table structure for table `custom_game`
+--
+
+CREATE TABLE `custom_game` (
+  `custom_game_id` int(10) UNSIGNED NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_game`
+--
+
+INSERT INTO `custom_game` (`custom_game_id`, `player_id`) VALUES
+(6, 1),
+(7, 2),
+(8, 7),
+(4, 12),
+(9, 14),
+(10, 52),
+(2, 103),
+(5, 112),
+(1, 123),
+(3, 145);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_game_session`
+--
+
+CREATE TABLE `custom_game_session` (
+  `custom_session_id` int(11) NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `custom_game_id` int(10) UNSIGNED NOT NULL,
+  `session_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `total_score` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_game_session`
+--
+
+INSERT INTO `custom_game_session` (`custom_session_id`, `player_id`, `custom_game_id`, `session_date`, `total_score`) VALUES
+(1, 123, 1, '2025-07-08 10:00:00', 3000),
+(2, 103, 2, '2025-07-09 11:00:00', 2550),
+(3, 145, 3, '2025-07-10 12:30:00', 4000),
+(4, 12, 4, '2025-07-11 09:00:00', 500),
+(5, 112, 5, '2025-07-12 15:00:00', 5000),
+(6, 1, 6, '2025-07-13 15:00:00', 2250),
+(7, 2, 7, '2025-07-14 15:00:00', 3150),
+(8, 7, 8, '2025-07-15 18:45:00', 3300),
+(9, 14, 9, '2025-07-16 10:10:20', 1850),
+(10, 52, 10, '2025-07-17 10:30:00', 2700);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_leaderboard`
+--
+
+CREATE TABLE `custom_leaderboard` (
+  `custom_leaderboard_id` int(10) UNSIGNED NOT NULL,
+  `custom_game_id` int(10) UNSIGNED NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `entry_count` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_leaderboard`
+--
+
+INSERT INTO `custom_leaderboard` (`custom_leaderboard_id`, `custom_game_id`, `start_date`, `end_date`, `entry_count`) VALUES
+(1, 1, '2025-07-01', '2025-07-07', 4),
+(2, 2, '2025-07-03', '2025-07-10', 4),
+(3, 3, '2025-07-04', '2025-07-11', 3),
+(4, 4, '2025-08-01', '2025-08-07', 3),
+(5, 5, '2025-06-01', '2025-06-07', 3),
+(6, 6, '2025-05-10', '2025-05-17', 3),
+(7, 7, '2025-08-11', '2025-08-18', 3),
+(8, 8, '2025-08-18', '2025-08-25', 3),
+(9, 9, '2025-05-15', '2025-05-22', 3),
+(10, 10, '2025-05-22', '2025-05-29', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_leaderboard_entry`
+--
+
+CREATE TABLE `custom_leaderboard_entry` (
+  `custom_leaderboard_entry_id` int(10) UNSIGNED NOT NULL,
+  `custom_leaderboard_id` int(10) UNSIGNED NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `max_score` int(10) UNSIGNED NOT NULL,
+  `ranking` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_leaderboard_entry`
+--
+
+INSERT INTO `custom_leaderboard_entry` (`custom_leaderboard_entry_id`, `custom_leaderboard_id`, `player_id`, `max_score`, `ranking`) VALUES
+(1, 1, 123, 3000, 3),
+(2, 1, 103, 2550, 4),
+(3, 1, 145, 4000, 1),
+(4, 1, 112, 3600, 2),
+(5, 2, 12, 500, 4),
+(6, 2, 1, 2250, 3),
+(7, 2, 2, 3150, 2),
+(8, 2, 7, 3300, 1),
+(9, 3, 14, 1850, 3),
+(10, 3, 52, 2700, 2),
+(11, 3, 103, 4100, 1),
+(12, 4, 112, 5000, 1),
+(13, 4, 123, 4700, 2),
+(14, 4, 1, 3900, 3),
+(15, 5, 7, 3200, 3),
+(16, 5, 2, 3500, 2),
+(17, 5, 145, 5000, 1),
+(18, 6, 52, 2800, 3),
+(19, 6, 12, 3500, 2),
+(20, 6, 103, 4100, 1),
+(21, 7, 123, 3000, 3),
+(22, 7, 112, 4200, 2),
+(23, 7, 14, 5000, 1),
+(24, 8, 145, 4400, 1),
+(25, 8, 7, 3500, 2),
+(26, 8, 2, 2800, 3),
+(27, 9, 52, 1900, 3),
+(28, 9, 1, 2200, 2),
+(29, 9, 14, 2700, 1),
+(30, 10, 112, 4900, 1),
+(31, 10, 103, 4500, 2),
+(32, 10, 123, 4000, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `custom_photo_pool`
+--
+
+CREATE TABLE `custom_photo_pool` (
+  `custom_photo_pool_id` int(10) UNSIGNED NOT NULL,
+  `custom_game_id` int(10) UNSIGNED NOT NULL,
+  `photo_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `custom_photo_pool`
+--
+
+INSERT INTO `custom_photo_pool` (`custom_photo_pool_id`, `custom_game_id`, `photo_id`) VALUES
+(1, 1, 100),
+(2, 1, 101),
+(3, 1, 102),
+(4, 2, 103),
+(5, 2, 104),
+(6, 3, 105),
+(7, 3, 106),
+(8, 4, 107),
+(9, 4, 108),
+(10, 4, 109),
+(11, 5, 100),
+(12, 5, 105),
+(13, 6, 101),
+(14, 6, 106),
+(15, 7, 102),
+(16, 7, 107),
+(17, 8, 103),
+(18, 8, 108),
+(19, 9, 104),
+(20, 9, 109),
+(21, 10, 100),
+(22, 10, 103);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game_session`
+--
+
+CREATE TABLE `game_session` (
+  `session_id` int(10) UNSIGNED NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `session_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `total_score` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `game_session`
+--
+
+INSERT INTO `game_session` (`session_id`, `player_id`, `session_date`, `total_score`) VALUES
+(1, 123, '2025-07-01 14:20:00', 4200),
+(2, 103, '2025-07-02 13:15:00', 3800),
+(3, 145, '2025-07-03 11:05:00', 5100),
+(4, 12, '2025-07-04 10:10:00', 2600),
+(5, 112, '2025-07-05 09:50:00', 5900),
+(6, 1, '2025-07-06 12:00:00', 3000),
+(7, 2, '2025-07-07 15:30:00', 4700),
+(8, 7, '2025-07-08 17:45:00', 5200),
+(9, 14, '2025-07-09 10:40:00', 2100),
+(10, 52, '2025-07-10 11:55:00', 3300);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guess`
+--
+
+CREATE TABLE `guess` (
+  `guess_id` int(10) UNSIGNED NOT NULL,
+  `session_id` int(10) UNSIGNED NOT NULL,
+  `photo_id` int(10) UNSIGNED NOT NULL,
+  `guessed_room` varchar(50) NOT NULL,
+  `gueesed_floor` varchar(50) NOT NULL,
+  `guessed_building` varchar(50) NOT NULL,
+  `is_corrent` tinyint(1) NOT NULL,
+  `proximity_score` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guess`
+--
+
+INSERT INTO `guess` (`guess_id`, `session_id`, `photo_id`, `guessed_room`, `gueesed_floor`, `guessed_building`, `is_corrent`, `proximity_score`) VALUES
+(1, 1, 100, 'Room 340', '3', '6 Metrotech Center', 1, 980),
+(2, 2, 101, 'Room 342', '3', '6 Metrotech Center', 1, 950),
+(3, 3, 102, 'Room 201', '2', '6 Metrotech Center', 1, 970),
+(4, 4, 103, 'Room 840', '8', 'Jay Street 370', 0, 700),
+(5, 5, 104, 'Room 701', '7', 'Jay Street 370', 1, 1000),
+(6, 6, 105, 'Room 301', '3', '5 Metrotech Center', 1, 930),
+(7, 7, 106, 'Room 820', '8', '2 Metrotech Center', 1, 920),
+(8, 8, 107, 'Room 922', '9', '2 Metrotech Center', 0, 450),
+(9, 9, 108, 'Room 1012', '10', '2 Metrotech Center', 1, 890),
+(10, 10, 109, 'Room 340', '3', '6 Metrotech Center', 1, 940);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaderboard`
+--
+
+CREATE TABLE `leaderboard` (
+  `leaderboard_id` int(10) UNSIGNED NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `entry_count` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leaderboard`
+--
+
+INSERT INTO `leaderboard` (`leaderboard_id`, `start_date`, `end_date`, `entry_count`) VALUES
+(1, '2025-05-25', '2025-06-01', 4),
+(2, '2025-06-01', '2025-06-08', 4),
+(3, '2025-06-08', '2025-06-15', 3),
+(4, '2025-06-15', '2025-06-22', 3),
+(5, '2025-06-29', '2025-07-06', 4),
+(6, '2025-07-06', '2025-07-13', 3),
+(7, '2025-07-13', '2025-07-20', 3),
+(8, '2025-07-20', '2025-07-27', 3),
+(9, '2025-07-27', '2025-08-04', 3),
+(10, '2025-08-11', '2025-08-19', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaderboard_entry`
+--
+
+CREATE TABLE `leaderboard_entry` (
+  `entry_id` int(10) UNSIGNED NOT NULL,
+  `leaderboard_id` int(10) UNSIGNED NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `max_score` int(10) UNSIGNED NOT NULL,
+  `ranking` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leaderboard_entry`
+--
+
+INSERT INTO `leaderboard_entry` (`entry_id`, `leaderboard_id`, `player_id`, `max_score`, `ranking`) VALUES
+(1, 1, 103, 4800, 2),
+(2, 1, 112, 5100, 1),
+(3, 1, 14, 4200, 3),
+(4, 1, 2, 3900, 4),
+(5, 2, 123, 5600, 1),
+(6, 2, 7, 5300, 2),
+(7, 2, 145, 4800, 3),
+(8, 2, 1, 4500, 4),
+(9, 3, 52, 4700, 3),
+(10, 3, 103, 4900, 2),
+(11, 3, 112, 5200, 1),
+(12, 4, 2, 4300, 3),
+(13, 4, 7, 4900, 1),
+(14, 4, 145, 4700, 2),
+(15, 5, 12, 5000, 1),
+(16, 5, 103, 4700, 2),
+(17, 5, 14, 4500, 3),
+(18, 5, 52, 4000, 4),
+(19, 6, 123, 5500, 1),
+(20, 6, 145, 5300, 2),
+(21, 6, 1, 4700, 3),
+(22, 7, 7, 5600, 1),
+(23, 7, 112, 5300, 2),
+(24, 7, 103, 5000, 3),
+(25, 8, 14, 5400, 1),
+(26, 8, 123, 5100, 2),
+(27, 8, 7, 4800, 3),
+(28, 9, 52, 5000, 1),
+(29, 9, 145, 4700, 2),
+(30, 9, 12, 4200, 3),
+(31, 10, 112, 6000, 1),
+(32, 10, 103, 5500, 2),
+(33, 10, 123, 5000, 3),
+(34, 10, 145, 4700, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `photo`
+--
+
+CREATE TABLE `photo` (
+  `photo_id` int(10) UNSIGNED NOT NULL,
+  `photo_data` longblob NOT NULL,
+  `room` varchar(50) NOT NULL,
+  `floor` varchar(50) NOT NULL,
+  `building` varchar(50) NOT NULL,
+  `upload_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `photo`
+--
+
+INSERT INTO `photo` (`photo_id`, `photo_data`, `room`, `floor`, `building`, `upload_date`) VALUES
+(100, 0x01, 'Room 340', '3', '6 Metrotech Center', '2025-07-01 10:00:00'),
+(101, 0x01, 'Room 342', '3', '6 Metrotech Center', '2025-07-01 10:00:00'),
+(102, 0x02, 'Room 201', '2', '6 Metrotech Center', '2025-07-01 10:00:00'),
+(103, 0x03, 'Room 840', '8', 'Jay Street 370', '2025-07-01 10:00:00'),
+(104, 0x04, 'Room 701', '7', 'Jay Street 370', '2025-08-01 10:00:00'),
+(105, 0x05, 'Room 301', '3', '5 Metrotech Center', '2025-08-01 10:00:00'),
+(106, 0x06, 'Room 820', '8', '2 Metrotech Center', '2025-07-01 10:00:00'),
+(107, 0x07, 'Room 922', '9', '2 Metrotech Center', '2025-07-02 10:00:00'),
+(108, 0x08, 'Room 1012', '10', '2 Metrotech Center', '2025-07-03 10:00:00'),
+(109, 0x09, 'Room 340', '3', '6 Metrotech Center', '2025-07-05 10:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `player`
+--
+
+CREATE TABLE `player` (
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `registration_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `player`
+--
+
+INSERT INTO `player` (`player_id`, `username`, `password`, `email`, `registration_date`) VALUES
+(1, 'Friendly Person', 'benice', 'fp7523@nyu.edu', '2025-08-21 07:30:00'),
+(2, 'NYU Account', 'admincode123', 'ny0123@nyu.edu', '2025-07-12 11:45:30'),
+(7, 'Jill', 'jillmakesgoodcookies', 'jl9999@nyu.edu', '2025-07-01 10:30:00'),
+(12, 'Bobby', 'bobbymarch', 'bb1281@nyu.edu', '2025-08-03 11:30:00'),
+(14, 'Tiffany Jones', 'movies123', 'tj1201@nyu.edu', '2025-07-05 10:11:00'),
+(52, 'Jack Hanson', 'scary123', 'jh9283@nyu.edu', '2025-08-11 10:12:00'),
+(103, 'Billy Jones', 'ilovepizza', 'bj1242@nyu.edu', '2025-08-11 10:30:00'),
+(112, 'Tilly', 'tilliwin', 'tl9182@nyu.edu', '2025-08-15 12:15:00'),
+(123, 'Billy Bob', 'i123', 'bb1242@nyu.edu', '2025-07-08 10:41:15'),
+(145, 'Tandon Lover', 'mynameis123', 'tt1234@nyu.edu', '2025-08-01 10:50:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `custom_game`
+--
+ALTER TABLE `custom_game`
+  ADD PRIMARY KEY (`custom_game_id`),
+  ADD KEY `player_id` (`player_id`);
+
+--
+-- Indexes for table `custom_game_session`
+--
+ALTER TABLE `custom_game_session`
+  ADD PRIMARY KEY (`custom_session_id`),
+  ADD KEY `custom_game_id` (`custom_game_id`),
+  ADD KEY `player_id` (`player_id`);
+
+--
+-- Indexes for table `custom_leaderboard`
+--
+ALTER TABLE `custom_leaderboard`
+  ADD PRIMARY KEY (`custom_leaderboard_id`),
+  ADD KEY `custom_game_id` (`custom_game_id`);
+
+--
+-- Indexes for table `custom_leaderboard_entry`
+--
+ALTER TABLE `custom_leaderboard_entry`
+  ADD PRIMARY KEY (`custom_leaderboard_entry_id`),
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `custom_leaderboard_id` (`custom_leaderboard_id`);
+
+--
+-- Indexes for table `custom_photo_pool`
+--
+ALTER TABLE `custom_photo_pool`
+  ADD PRIMARY KEY (`custom_photo_pool_id`),
+  ADD KEY `custom_game_id` (`custom_game_id`),
+  ADD KEY `photo_id` (`photo_id`);
+
+--
+-- Indexes for table `game_session`
+--
+ALTER TABLE `game_session`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `player_id` (`player_id`);
+
+--
+-- Indexes for table `guess`
+--
+ALTER TABLE `guess`
+  ADD PRIMARY KEY (`guess_id`),
+  ADD KEY `session_id` (`session_id`),
+  ADD KEY `photo_id` (`photo_id`);
+
+--
+-- Indexes for table `leaderboard`
+--
+ALTER TABLE `leaderboard`
+  ADD PRIMARY KEY (`leaderboard_id`);
+
+--
+-- Indexes for table `leaderboard_entry`
+--
+ALTER TABLE `leaderboard_entry`
+  ADD PRIMARY KEY (`entry_id`),
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `leaderboard_id` (`leaderboard_id`);
+
+--
+-- Indexes for table `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`photo_id`);
+
+--
+-- Indexes for table `player`
+--
+ALTER TABLE `player`
+  ADD PRIMARY KEY (`player_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `custom_game`
+--
+ALTER TABLE `custom_game`
+  MODIFY `custom_game_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `custom_game_session`
+--
+ALTER TABLE `custom_game_session`
+  MODIFY `custom_session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `custom_leaderboard`
+--
+ALTER TABLE `custom_leaderboard`
+  MODIFY `custom_leaderboard_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `custom_leaderboard_entry`
+--
+ALTER TABLE `custom_leaderboard_entry`
+  MODIFY `custom_leaderboard_entry_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `custom_photo_pool`
+--
+ALTER TABLE `custom_photo_pool`
+  MODIFY `custom_photo_pool_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `game_session`
+--
+ALTER TABLE `game_session`
+  MODIFY `session_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `guess`
+--
+ALTER TABLE `guess`
+  MODIFY `guess_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `leaderboard`
+--
+ALTER TABLE `leaderboard`
+  MODIFY `leaderboard_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `leaderboard_entry`
+--
+ALTER TABLE `leaderboard_entry`
+  MODIFY `entry_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `photo`
+--
+ALTER TABLE `photo`
+  MODIFY `photo_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
+--
+-- AUTO_INCREMENT for table `player`
+--
+ALTER TABLE `player`
+  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `custom_game`
+--
+ALTER TABLE `custom_game`
+  ADD CONSTRAINT `custom_game_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`);
+
+--
+-- Constraints for table `custom_game_session`
+--
+ALTER TABLE `custom_game_session`
+  ADD CONSTRAINT `custom_game_session_ibfk_1` FOREIGN KEY (`custom_game_id`) REFERENCES `custom_game` (`custom_game_id`),
+  ADD CONSTRAINT `custom_game_session_ibfk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`);
+
+--
+-- Constraints for table `custom_leaderboard`
+--
+ALTER TABLE `custom_leaderboard`
+  ADD CONSTRAINT `custom_leaderboard_ibfk_1` FOREIGN KEY (`custom_game_id`) REFERENCES `custom_game` (`custom_game_id`);
+
+--
+-- Constraints for table `custom_leaderboard_entry`
+--
+ALTER TABLE `custom_leaderboard_entry`
+  ADD CONSTRAINT `custom_leaderboard_entry_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`),
+  ADD CONSTRAINT `custom_leaderboard_entry_ibfk_2` FOREIGN KEY (`custom_leaderboard_id`) REFERENCES `custom_leaderboard` (`custom_leaderboard_id`);
+
+--
+-- Constraints for table `custom_photo_pool`
+--
+ALTER TABLE `custom_photo_pool`
+  ADD CONSTRAINT `custom_photo_pool_ibfk_1` FOREIGN KEY (`custom_game_id`) REFERENCES `custom_game` (`custom_game_id`),
+  ADD CONSTRAINT `custom_photo_pool_ibfk_2` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`photo_id`);
+
+--
+-- Constraints for table `game_session`
+--
+ALTER TABLE `game_session`
+  ADD CONSTRAINT `game_session_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`);
+
+--
+-- Constraints for table `guess`
+--
+ALTER TABLE `guess`
+  ADD CONSTRAINT `guess_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `game_session` (`session_id`),
+  ADD CONSTRAINT `guess_ibfk_2` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`photo_id`);
+
+--
+-- Constraints for table `leaderboard_entry`
+--
+ALTER TABLE `leaderboard_entry`
+  ADD CONSTRAINT `leaderboard_entry_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`),
+  ADD CONSTRAINT `leaderboard_entry_ibfk_2` FOREIGN KEY (`leaderboard_id`) REFERENCES `leaderboard` (`leaderboard_id`);
+COMMIT;
+
+-- USER LOGIN:
+
+SELECT player_id, username
+FROM player
+WHERE email = /* email inputted */ AND password = /* password inputted */;
+
+-- If a row is returned, the user has successfully logged in. 
+-- If no row is returned, the user entered an invalid email-password combination.
+
+-- USER SIGNUP: 
+
+INSERT INTO player (username, email, password)
+VALUES (/* inputted username, email, password */)
+
+-- Populates player table with new player account information.
+-- In future implementation, passwords will be hashed before stored. 
+
+-- POPULATING CUSTOM GAMES LIST: 
+
+SELECT c.custom_game_id, p.username AS creator
+FROM custom_game c
+INNER JOIN player p ON c.player_id = p.player_id;
+
+-- Returns all custom games with their associated creator.
+-- This will populate the table in the custom game search screen.
+
+-- SEARCHING CUSTOM GAMES LIST BY GAME ID OR CREATOR NAME:
+
+SELECT c.custom_game_id, p.username AS creator
+FROM custom_game c
+INNER JOIN player p ON c.player_id = p.player_id
+WHERE p.username LIKE /* input search term */ 
+   OR c.custom_game_name LIKE /* input search term */;
+
+-- Returns any custom games that match the search term inputted. 
+-- Used for the search feature in the custom game search screen.
+
+-- START NORMAL GAME SESSION: 
+
+INSERT INTO game_session (player_id, total_score)
+VALUES (/* inputted player id */, 0);
+
+-- Creates new game session for player id with the score initialized to 0.
+
+-- START CUSTOM GAME SESSION: 
+
+INSERT INTO custom_game_session (player_id, custom_game_id, total_score)
+VALUES (/* inputted player id , selected custom game id */, 0);
+
+-- START CUSTOM GAME: 
+
+INSERT INTO custom_game (player_id, custom_game_name)
+VALUES (/* inputted player_id , custom game name */);
+
+-- FETCH PHOTO FOR GUESS: 
+
+SELECT photo_id, photo_data, room, floor, building
+FROM photo
+ORDER BY RAND()
+LIMIT 1;
+
+-- Randomly select photo from the database along with its room, floor, and building.
+-- Used to display image on guessing page as well as keeping track of its correct room, floor and building.
+
+-- ADDING PHOTOS TO CUSTOM GAME:
+
+INSERT INTO custom_photo_pool (custom_game_id, photo_id)
+VALUES (/* custom game id , selected photo id */);
+
+-- User selects photos to be added to the custom game photo pool. 
+
+-- FETCH RANDOM PHOTO FROM CUSTOM PHOTO POOL: 
+
+SELECT cpp.photo_id, p.photo_data, p.room, p.floor, p.building
+FROM custom_photo_pool cpp
+INNER JOIN photo p ON cpp.photo_id = p.photo_id
+WHERE cpp.custom_game_id = /* selected custom_game_id */
+ORDER BY RAND()
+LIMIT 1;
+
+-- Returns a random photo from the selected custom game's photo pool.
+-- INSERTING GUESS INTO GUESS TABLE: 
+
+INSERT INTO guess (session_id, photo_id, guessed_room, guessed_floor, guessed_building, is_correct, proximity_score)
+VALUES (/* session_id , photo_id , guessed_room , guessed_floor , guessed_building , 0 or 1 , calculated score */);
+-- FETCH GLOBAL LEADERBOARD:
+
+SELECT le.player_id, p.username, le.max_score, le.ranking
+FROM leaderboard_entry le
+INNER JOIN player p ON le.player_id = p.player_id
+WHERE le.leaderboard_id = /* selected leaderboard_id */
+ORDER BY le.ranking ASC;
+
+-- Returns list of players, their usernames, scores, and rankings for the associated leaderboard. 
+
+-- FETCH CUSTOM LEADERBOARD:
+
+SELECT cle.custom_leaderboard_entry_id, p.username, cle.max_score, cle.ranking
+FROM custom_leaderboard_entry cle
+INNER JOIN player p ON cle.player_id = p.player_id
+WHERE cle.custom_leaderboard_id = /* selected leaderboard_id */
+ORDER BY cle.ranking ASC;
+
+--VIEW TABLE SCHEMAS
+DESC custom_game;
+DESC custom_game_session;
+DESC custom_leaderboard;
+DESC custom_leaderboard_entry;
+DESC custom_photo_pool;
+DESC game_session;
+DESC guess;
+DESC leaderboard;
+DESC leaderboard_entry;
+DESC photo;
+DESC player;
+
+--GET TOTAL NUMBER OF ROWS OF DATA IN EACH TABLE
+SELECT COUNT(*) FROM custom_game;
+SELECT COUNT(*) FROM custom_game_session;
+SELECT COUNT(*) FROM custom_leaderboard;
+SELECT COUNT(*) FROM custom_leaderboard_entry;
+SELECT COUNT(*) FROM custom_photo_pool;
+SELECT COUNT(*) FROM game_session;
+SELECT COUNT(*) FROM guess;
+SELECT COUNT(*) FROM leaderboard;
+SELECT COUNT(*) FROM leaderboard_entry;
+SELECT COUNT(*) FROM photo;
+SELECT COUNT(*) FROM player;
+
+--GET EVIDENCE SHOWING DATA
+SELECT * FROM custom_game;
+SELECT * FROM custom_game_session;
+SELECT * FROM custom_leaderboard;
+SELECT * FROM custom_leaderboard_entry;
+SELECT * FROM custom_custom_photo_pool;
+SELECT * FROM game_session;
+SELECT * FROM guess;
+SELECT * FROM leaderboard;
+SELECT * FROM leaderboard_entry;
+SELECT * FROM photo;
+SELECT * FROM player;
+
+--ADVANCED PL/SQL Commands
+
+-- STORED PROCEDURE TO UPDATE GAME SESSION SCORE:
+
+DELIMITER $$
+
+CREATE PROCEDURE update_game_score(
+    IN p_session_id INT,
+    IN p_score INT
+)
+BEGIN
+    -- Update total score for a normal game session
+    UPDATE game_session
+    SET total_score = total_score + p_score
+    WHERE session_id = p_session_id;
+END $$
+
+DELIMITER ;
+
+-- This procedure will likely be modified in the future to handle custom games as well. 
+
+-- TRIGGER GLOBAL LEADERBOARD UPDATE AFTER GAME SESSION:
+
+CREATE TRIGGER update_leaderboard_after_session
+AFTER UPDATE ON game_session
+FOR EACH ROW
+BEGIN
+    INSERT INTO leaderboard_entry (leaderboard_id, player_id, max_score)
+    VALUES (/*global leaderboard id*/, NEW.player_id, NEW.total_score)
+    ON DUPLICATE KEY UPDATE max_score = GREATEST(max_score, NEW.total_score);
+END;
+
+-- This will automatically update the leaderboard once the game session's total score changes. 
+-- A similar trigger can be written for custom game sessions.
