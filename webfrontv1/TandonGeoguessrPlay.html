@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <!-- Tailwind via CDN for convenience -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="A clean, responsive UI page template using Tailwind CSS." />
+</head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <header>
+    <section class="flex flex-row justify-between">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <h1 class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</h1>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">Week of [Date1] - [Date2]</p>
+        </div>
+      </div>
+    
+      <div class="mt-12 mr-16 flex flex-row items-center">
+        <div class="grid gap-2 grid-rows-2 items-center">
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">[Username]</p>
+          </div>
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">Best Score: [Score]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- HERO -->
+  <main class="mt-12 mx-auto max-w-7xl">
+    <section class="mx-12 h-[50vh] flex-1 bg-blue-200 text-center">
+      [picture]
+    </section>
+    <!-- MAKE THESE DROPDOWN INTO SCROLL INSTEAD (thats how foodguessr does it)-->
+    <section class="mx-12 mt-4 h-48 flex flex-row justify-between">
+      <div class="w-48 flex flex-col">
+        <div class="bg-violet-200 p-2 border border-violet-400">
+          <p>Building</p>
+        </div>
+        <div class="overflow-y-auto border border-gray-300">
+          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Building1]</button>
+        </div>
+      </div>
+      <div class="w-48 flex flex-col">
+        <div class="bg-violet-200 p-2 border border-violet-400">
+          <p>Floor</p>
+        </div>
+        <div class="overflow-y-auto border border-gray-300">
+          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Floor1]</button>
+        </div>
+      </div>
+      <div class="w-48 flex flex-col">
+        <div class="bg-violet-200 p-2 border border-violet-400">
+          <p>Room</p>
+        </div>
+        <div class="overflow-y-auto border border-gray-300">
+          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Room1]</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
