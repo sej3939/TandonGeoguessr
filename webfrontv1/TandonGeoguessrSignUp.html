@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <!-- Tailwind via CDN for convenience -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="A clean, responsive UI page template using Tailwind CSS." />
+</head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <!-- HERO -->
+  <main class="mt-44 mx-auto max-w-7xl">
+    <section class="flex flex-row justify-center items-center">
+      <div class="text-center">
+        <h1 class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</h1>
+      </div>
+    </section>
+
+    <section class="mt-12 mx-auto max-w-4xl flex flex-col items-center gap-6">
+      <p class="text-4xl font-semibold text-gray-600">Enter a Valid Email Address:</p>
+      <input id="emailInput"
+        type="text"
+        class="border border-gray-300 rounded-lg p-2 w-64"
+        placeholder="Type here..."
+      >
+      <p class="text-4xl font-semibold text-gray-600">Create a Password:</p>
+      <input id="passwordInput"
+        type="password"
+        class="border border-gray-300 rounded-lg p-2 w-64"
+        placeholder="••••••"
+      >
+      <button class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition" id="signBtn">Sign Up</button>
+      <p class="text-green-500 text-med h-5 opacity-0" id="successMsg">Login success!</p>
+      <p class="text-center text-med text-gray-600">Already have an account? 
+        <a href="TandonGeoguessrSignIn.html" class="text-med text-blue-600 hover:underline font-semibold">
+          Sign in here!
+        </a>
+      </p>
+    </section>
+  </main>
+  <script>
+    const signBtn = document.getElementById("signBtn");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+
+    loginBtn.onclick = function() {
+      let email = emailInput.value.trim();
+      let password = passwordInput.value.trim();
+
+        // Here you would redirect or load dashboard, for example:
+        // window.location.href = "/dashboard";
+    };
+  </script>
+</body>
+</html>
