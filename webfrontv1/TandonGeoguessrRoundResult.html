@@ -32,37 +32,22 @@
   </header>
 
   <!-- HERO -->
-  <main class="mt-12 mx-auto max-w-7xl">
-    <section class="mx-12 h-[50vh] flex-1 bg-blue-200 text-center">
+  <main class="mt-12 mx-auto max-w-7xl grid grid-cols-2">
+    <section class="h-[70vh] flex-1 bg-blue-200 text-center">
       [picture]
     </section>
-    <!-- MAKE THESE DROPDOWN INTO SCROLL INSTEAD (thats how foodguessr does it)-->
-    <section class="mx-12 mt-4 h-48 flex flex-row justify-between items-center">
-      <div class="w-48 flex flex-col">
-        <div class="bg-violet-200 p-2 border border-violet-400">
-          <p>Building</p>
-        </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Building1]</button>
-        </div>
+    <section class="mx-12 my-12 flex flex-col items-center gap-6">
+      <p class="text-6xl font-bold text-gray-600">Your Guess:</p>
+      <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
+          <p>Building: [Placeholder]</p>
+          <p>Room: [Placeholder]</p>
+          <p>Floor: [Placeholder]</p>
       </div>
-      <div class="w-48 flex flex-col">
-        <div class="bg-violet-200 p-2 border border-violet-400">
-          <p>Floor</p>
-        </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Floor1]</button>
-        </div>
+      <p class="text-6xl font-bold text-gray-600">Your Score:</p>
+      <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
+          <p>Score: [Placeholder]</p>
       </div>
-      <div class="w-48 flex flex-col">
-        <div class="bg-violet-200 p-2 border border-violet-400">
-          <p>Room</p>
-        </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Room1]</button>
-        </div>
-      </div>
-      <button class="px-16 py-12 rounded-md bg-violet-800 text-white hover:opacity-95 transition" id="loginBtn">Submit</button>
+      <a href="TandonGeoguessrPlay.html" class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition">Next Round</a>
     </section>
   </main>
 </body>
