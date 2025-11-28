@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <!-- Tailwind via CDN for convenience -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="A clean, responsive UI page template using Tailwind CSS." />
+</head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <header>
+    <section class="flex flex-row justify-between">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <a href="TandonGeoguessrHome.html" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">Week of [Date1] - [Date2]</p>
+        </div>
+      </div>
+    
+      <div class="mt-12 mr-16 flex flex-row items-center">
+        <div class="grid gap-2 grid-rows-2 items-center">
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">[Username]</p>
+          </div>
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">Best Score: [Score]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- HERO -->
+  <main class="mt-12 mx-auto max-w-7xl grid grid-cols-2">
+    <section class="h-[70vh] flex-1 bg-blue-200 text-center">
+      [picture]
+    </section>
+    <section class="mx-12 my-12 flex flex-col items-center gap-6">
+      <p class="text-6xl font-bold text-gray-600">Your Guess:</p>
+      <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
+          <p>Building: [Placeholder]</p>
+          <p>Room: [Placeholder]</p>
+          <p>Floor: [Placeholder]</p>
+      </div>
+      <p class="text-6xl font-bold text-gray-600">Your Score:</p>
+      <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
+          <p>Score: [Placeholder]</p>
+      </div>
+      <a href="TandonGeoguessrPlay.html" class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition">Next Round</a>
+    </section>
+  </main>
+</body>
+</html>
