@@ -10,7 +10,7 @@
 </head>
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
-    <section class="flex flex-row justify-between">
+    <section class="flex flex-row justify-between items-start">
       <div class="ml-16 flex flex-row items-center">
         <div>
           <a href="TandonGeoguessrHome.html" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
@@ -18,14 +18,12 @@
         </div>
       </div>
     
-      <div class="mt-12 mr-16 flex flex-row items-center">
-        <div class="grid gap-2 grid-rows-2 items-center">
-          <div class="flex flex-col items-end gap-2 text-2xl">
-            <p class="text-gray-600">[Username]</p>
-          </div>
-          <div class="flex flex-col items-end gap-2 text-2xl">
-            <p class="text-gray-600">Best Score: [Score]</p>
-          </div>
+      <div class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
+        <div class="flex flex-col items-end gap-2 text-2xl">
+          <p class="text-gray-600">[Username]</p>
+        </div>
+        <div class="flex flex-col items-end gap-2 text-2xl">
+          <p class="text-gray-600">Best Score: [Score]</p>
         </div>
       </div>
     </section>
@@ -38,32 +36,106 @@
     </section>
     <!-- MAKE THESE DROPDOWN INTO SCROLL INSTEAD (thats how foodguessr does it)-->
     <section class="mx-12 mt-4 h-48 flex flex-row justify-between items-center">
-      <div class="w-48 flex flex-col">
+      <div id="buildingContainer" class="w-72 flex flex-col relative">
         <div class="bg-violet-200 p-2 border border-violet-400">
           <p>Building</p>
         </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Building1]</button>
-        </div>
+
+        <input 
+          id="buildingInput"
+          type="text"
+          class="w-full border p-2"
+          placeholder="Search..."
+        />
+        <ul class="absolute bottom-full mb-1 left-0 right-0 bg-white border max-h-48 overflow-y-auto hidden"></ul>
       </div>
-      <div class="w-48 flex flex-col">
+      <div id="floorContainer" class="w-72 flex flex-col relative">
         <div class="bg-violet-200 p-2 border border-violet-400">
           <p>Floor</p>
         </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Floor1]</button>
-        </div>
+
+        <input 
+          id="floorInput"
+          type="text"
+          class="w-full border p-2"
+          placeholder="Search..."
+        />
+        <ul class="absolute bottom-full mb-1 left-0 right-0 bg-white border max-h-48 overflow-y-auto hidden"></ul>
       </div>
-      <div class="w-48 flex flex-col">
+      <div id="roomContainer" class="w-72 flex flex-col relative">
         <div class="bg-violet-200 p-2 border border-violet-400">
           <p>Room</p>
         </div>
-        <div class="overflow-y-auto border border-gray-300">
-          <button class="w-full text-start bg-gray-100 p-2 hover:opacity-80">[Room1]</button>
-        </div>
+
+        <input 
+          id="roomInput"
+          type="text"
+          class="w-full border p-2"
+          placeholder="Search..."
+        />
+        <ul class="absolute bottom-full mb-1 left-0 right-0 bg-white border max-h-48 overflow-y-auto hidden"></ul>
       </div>
-      <button class="px-16 py-12 rounded-md bg-violet-800 text-white hover:opacity-95 transition" id="loginBtn">Submit</button>
+      <button class="px-16 py-12 rounded-md bg-violet-800 text-white hover:opacity-95 transition" id="submitBtn">Submit</button>
     </section>
   </main>
+  <script>
+    const buildingOptions = [
+      "New York", "Los Angeles", "Chicago", "Houston", "Phoenix",
+      "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose"
+    ];
+
+    function createAutocomplete(containerId, inputId, options) {
+      const container = document.getElementById(containerId);
+      const input = document.getElementById(inputId);
+      const list = container.querySelector("ul");
+
+      function populateDropdown(matches) {
+        list.innerHTML = "";
+        matches.forEach(opt => {
+          const li = document.createElement("li");
+          li.textContent = opt;
+          li.className = "p-2 hover:bg-gray-200 cursor-pointer";
+          li.addEventListener("click", () => {
+            input.value = opt;
+            list.classList.add("hidden");
+          });
+          list.appendChild(li);
+        });
+        list.classList.toggle("hidden", matches.length === 0);
+      }
+
+      // Show all options on focus
+      input.addEventListener("focus", () => populateDropdown(options));
+
+      // Filter as user types
+      input.addEventListener("input", () => {
+        const value = input.value.toLowerCase();
+        const matches = options.filter(opt => opt.toLowerCase().startsWith(value));
+        populateDropdown(matches);
+      });
+
+      // Hide dropdown if click is outside container
+      document.addEventListener("click", (e) => {
+        if (!container.contains(e.target)) {
+          list.classList.add("hidden");
+        }
+      });
+    }
+    createAutocomplete("buildingContainer", "buildingInput", buildingOptions);
+    createAutocomplete("floorContainer", "floorInput", buildingOptions);
+    createAutocomplete("roomContainer", "roomInput", buildingOptions);
+  </script>
+  <script>
+    const submitBtn = document.getElementById("loginBtn");
+    const buildingInput = document.getElementById("buildingInput");
+    const floorInput = document.getElementById("floorInput");
+    const roomInput = document.getElementById("roomInput");
+
+    submitBtn.onclick = function() {
+      let building = buildingInput.value.trim();
+      let floor = floorInput.value.trim();
+      let roomInput = roomInput.value.trim();
+    };
+  </script>
 </body>
 </html>

@@ -44,7 +44,6 @@
     const passwordInput = document.getElementById("passwordInput");
 
     const loginError = document.getElementById("loginError");
-    const successMsg = document.getElementById("successMsg");
 
     loginBtn.onclick = function() {
       let email = emailInput.value.trim();
@@ -52,12 +51,10 @@
 
       // Reset previous errors
       loginError.classList.add("opacity-0");
-      successMsg.classList.add("opacity-0");
-
+      
       if ((email !== CORRECT_EMAIL) || password !== CORRECT_PASSWORD) {
         loginError.classList.remove("opacity-0");
       } else {
-        successMsg.classList.remove("opacity-0");
         window.location.href = "TandonGeoguessrHome.html";
       }
     };
