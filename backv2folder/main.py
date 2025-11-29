@@ -116,7 +116,6 @@ def signin_redirect():
 
 @app.route("/signup", methods = ["GET","POST"])
 def signup():
-    # SignUp HTML file doesn't currently work with this
     if request.method == "POST":
         username = request.form.get("username") 
         email = request.form.get("email")
@@ -137,3 +136,4 @@ def signup_redirect():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
