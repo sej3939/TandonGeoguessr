@@ -103,6 +103,8 @@ def signin():
         user = cursor.fetchone()
         cursor.close()
         db.close()
+        
+        # Since we're hashing now, the manually-inserted accounts currently in the db cannot be logged into because their hashed passwords aren't stored.
         if user and check_password_hash(user["password"], raw_password):
             session['user_id']=user['player_id']
             session['username']=user['username']
@@ -123,6 +125,8 @@ def signup():
         hashed_password = generate_password_hash(raw_password)
         db = database()
         cursor = db.cursor(dictionary=True)
+        
+        # This currently doesn't work because the hashed password has a character length up to 255, so the password field has to be changed to VARCHAR(255). 
         cursor.execute("INSERT INTO player (username, password, email) VALUES (%s, %s, %s)", (username, hashed_password, email))
         db.commit()
         cursor.close()
@@ -136,4 +140,5 @@ def signup_redirect():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
