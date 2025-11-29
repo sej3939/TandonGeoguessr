@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+
+  <!-- Tailwind via CDN for convenience -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <meta name="description" content="Tandon Geoguessr Play Page" />
+</head>
+
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+
+  <header>
+    <section class="flex flex-row justify-between">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">
+            Round {{ current_round }} of {{ max_rounds }}
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 mr-16 flex flex-row items-center">
+        <div class="grid gap-2 grid-rows-2 items-center">
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">{{ username }}</p>
+          </div>
+          <div class="flex flex-col items-end gap-2 text-2xl">
+            <p class="text-gray-600">Best Score: {{ best_score }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- HERO -->
+  <main class="mt-12 mx-auto max-w-7xl">
+
+    <!-- PHOTO DISPLAY -->
+    <section class="mx-12 h-[50vh] flex-1 bg-blue-200 text-center flex items-center justify-center">
+      {% if photo %}
+        <img src="{{ photo.photo_data }}" class="max-h-full max-w-full" />
+      {% else %}
+        <p>[No Photo Loaded]</p>
+      {% endif %}
+    </section>
+
+<!-- DEV ONLY: show correct answer so you can test scoring -->
+<div style="
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #fee;
+  border: 2px dashed red;
+  font-size: 18px;
+">
+  <strong>DEBUG – Correct Answer (for testing only):</strong>
+  <p>Building: {{ photo.building }}</p>
+  <p>Floor: {{ photo.floor }}</p>
+  <p>Room: {{ photo.room }}</p>
+</div>
+
+
+    <!-- REAL FORM THAT SENDS DATA TO FLASK -->
+    <form method="POST" action="{{ url_for('submit_guess') }}">
+
+      <section class="mx-12 mt-4 h-48 flex flex-row justify-between items-center">
+
+        <!-- BUILDING -->
+        <div class="w-48 flex flex-col">
+          <div class="bg-violet-200 p-2 border border-violet-400">
+            <p>Building</p>
+          </div>
+          <input
+            class="border p-2"
+            name="guessed_building"
+            placeholder="Enter building"
+            required
+          />
+        </div>
+
+        <!-- FLOOR -->
+        <div class="w-48 flex flex-col">
+          <div class="bg-violet-200 p-2 border border-violet-400">
+            <p>Floor</p>
+          </div>
+          <input
+            class="border p-2"
+            name="guessed_floor"
+            placeholder="Enter floor"
+            required
+          />
+        </div>
+
+        <!-- ROOM -->
+        <div class="w-48 flex flex-col">
+          <div class="bg-violet-200 p-2 border border-violet-400">
+            <p>Room</p>
+          </div>
+          <input
+            class="border p-2"
+            name="guessed_room"
+            placeholder="Enter room"
+            required
+          />
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button
+          type="submit"
+          class="px-16 py-12 rounded-md bg-violet-800 text-white hover:opacity-95 transition"
+        >
+          Submit Guess
+        </button>
+
+      </section>
+    </form>
+  </main>
+
+</body>
+</html>
