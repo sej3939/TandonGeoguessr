@@ -10,12 +10,15 @@
 </head>
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
-    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-center">
-      <div class="flex flex-col items-end gap-2 text-2xl">
-        <p class="text-gray-600">[Username]</p>
+    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
+      <div class="flex flex-col items-end gap-2 text-2xl relative">
+        <button id="usernameBtn" class="text-gray-600"></button>
+      </div>
+      <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
+        <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
       </div>
       <div class="flex flex-col items-end gap-2 text-2xl">
-        <p class="text-gray-600">Best Score: [Score]</p>
+        <p id="myScore" class="text-gray-600"></p>
       </div>
     </section>
   </header>
@@ -103,5 +106,38 @@
       </div>
     </section>
   </main>
+  <script>
+    const username = sessionStorage.getItem("username") || "Guest";
+    const score = sessionStorage.getItem("bestScore") || 0;
+
+    const usernameBtn = document.getElementById("usernameBtn");
+    const scoreText = document.getElementById("myScore");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    usernameBtn.textContent = username;
+    scoreText.textContent = "Best Score: " + score;
+    
+    usernameBtn.onclick = function(e) {
+      if (username !== "Guest") {
+        userDropdown.classList.toggle("hidden");
+      } else {
+        window.location.href = "TandonGeoguessrSignIn.html";
+      }
+    };
+
+    // Close dropdown if clicked outside
+    document.addEventListener("click", function(e) {
+      if (!usernameBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+        userDropdown.classList.add("hidden");
+      }
+    });
+
+    // Log out
+    logoutBtn.onclick = function() {
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("bestScore");
+      window.location.href = "TandonGeoguessrSignIn.html";
+    };
+  </script>
 </body>
 </html>

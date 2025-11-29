@@ -10,21 +10,15 @@
 </head>
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
-    <section class="flex flex-row justify-between items-start">
-      <div class="ml-16 flex flex-row items-center">
-        <div>
-          <a href="TandonGeoguessrHome.html" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
-          <p class="mt-6 text-4xl font-semibold text-gray-600">Week of [Date1] - [Date2]</p>
-        </div>
+    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
+      <div class="flex flex-col items-end gap-2 text-2xl relative">
+        <button id="usernameBtn" class="text-gray-600"></button>
       </div>
-    
-      <div class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
-        <div class="flex flex-col items-end gap-2 text-2xl">
-          <p class="text-gray-600">[Username]</p>
-        </div>
-        <div class="flex flex-col items-end gap-2 text-2xl">
-          <p class="text-gray-600">Best Score: [Score]</p>
-        </div>
+      <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
+        <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
+      </div>
+      <div class="flex flex-col items-end gap-2 text-2xl">
+        <p id="myScore" class="text-gray-600"></p>
       </div>
     </section>
   </header>
@@ -34,7 +28,6 @@
     <section class="mx-12 h-[50vh] flex-1 bg-blue-200 text-center">
       [picture]
     </section>
-    <!-- MAKE THESE DROPDOWN INTO SCROLL INSTEAD (thats how foodguessr does it)-->
     <section class="mx-12 mt-4 h-48 flex flex-row justify-between items-center">
       <div id="buildingContainer" class="w-72 flex flex-col relative">
         <div class="bg-violet-200 p-2 border border-violet-400">
@@ -78,6 +71,39 @@
       <button class="px-16 py-12 rounded-md bg-violet-800 text-white hover:opacity-95 transition" id="submitBtn">Submit</button>
     </section>
   </main>
+  <script>
+    const username = sessionStorage.getItem("username") || "Guest";
+    const score = sessionStorage.getItem("bestScore") || 0;
+
+    const usernameBtn = document.getElementById("usernameBtn");
+    const scoreText = document.getElementById("myScore");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    usernameBtn.textContent = username;
+    scoreText.textContent = "Best Score: " + score;
+    
+    usernameBtn.onclick = function(e) {
+      if (username !== "Guest") {
+        userDropdown.classList.toggle("hidden");
+      } else {
+        window.location.href = "TandonGeoguessrSignIn.html";
+      }
+    };
+
+    // Close dropdown if clicked outside
+    document.addEventListener("click", function(e) {
+      if (!usernameBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+        userDropdown.classList.add("hidden");
+      }
+    });
+
+    // Log out
+    logoutBtn.onclick = function() {
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("bestScore");
+      window.location.href = "TandonGeoguessrSignIn.html";
+    };
+  </script>
   <script>
     const buildingOptions = [
       "New York", "Los Angeles", "Chicago", "Houston", "Phoenix",
@@ -126,15 +152,20 @@
     createAutocomplete("roomContainer", "roomInput", buildingOptions);
   </script>
   <script>
-    const submitBtn = document.getElementById("loginBtn");
-    const buildingInput = document.getElementById("buildingInput");
-    const floorInput = document.getElementById("floorInput");
-    const roomInput = document.getElementById("roomInput");
-
     submitBtn.onclick = function() {
+      const submitBtn = document.getElementById("submitBtn");
+      const buildingInput = document.getElementById("buildingInput");
+      const floorInput = document.getElementById("floorInput");
+      const roomInput = document.getElementById("roomInput");
+
       let building = buildingInput.value.trim();
       let floor = floorInput.value.trim();
-      let roomInput = roomInput.value.trim();
+      let room = roomInput.value.trim();
+
+      sessionStorage.setItem("buildingGuess", building);
+      sessionStorage.setItem("floorGuess", floor);
+      sessionStorage.setItem("roomGuess", room);
+      window.location.href = "TandonGeoguessrRoundResult.html";
     };
   </script>
 </body>

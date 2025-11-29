@@ -55,6 +55,7 @@
       if ((email !== CORRECT_EMAIL) || password !== CORRECT_PASSWORD) {
         loginError.classList.remove("opacity-0");
       } else {
+        sessionStorage.setItem("username", emailInput.value.trim());
         window.location.href = "TandonGeoguessrHome.html";
       }
     };
