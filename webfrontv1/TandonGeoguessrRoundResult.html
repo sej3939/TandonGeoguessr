@@ -10,16 +10,25 @@
 </head>
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
-    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
-      <div class="flex flex-col items-end gap-2 text-2xl relative">
-        <button id="usernameBtn" class="text-gray-600"></button>
+    <section class="flex flex-row justify-between items-start">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <a href="TandonGeoguessrHome.html" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">Week of [Date1] - [Date2]</p>
+        </div>
       </div>
-      <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
-        <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
-      </div>
-      <div class="flex flex-col items-end gap-2 text-2xl">
-        <p id="myScore" class="text-gray-600"></p>
-      </div>
+    
+      <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
+        <div class="flex flex-col items-end gap-2 text-2xl relative">
+          <button id="usernameBtn" class="text-gray-600"></button>
+        </div>
+        <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
+          <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
+        </div>
+        <div class="flex flex-col items-end gap-2 text-2xl">
+          <p id="myScore" class="text-gray-600">[Score]</p>
+        </div>
+      </section>
     </section>
   </header>
 
@@ -31,9 +40,9 @@
     <section class="mx-12 my-12 flex flex-col items-center gap-6">
       <p class="text-6xl font-bold text-gray-600">Your Guess:</p>
       <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
-          <p id="myBuilding"></p>
-          <p id="myFloor"></p>
-          <p id="myRoom"></p>
+          <p id="myBuilding">Building: </p>
+          <p id="myFloor">Floor: </p>
+          <p id="myRoom">Room: </p>
       </div>
       <p class="text-6xl font-bold text-gray-600">Your Score:</p>
       <div class="bg-violet-200 text-3xl p-2 border border-violet-400">
@@ -42,17 +51,6 @@
       <a href="TandonGeoguessrPlay.html" class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition">Next Round</a>
     </section>
   </main>
-  <script>
-    const building = sessionStorage.getItem("buildingGuess");
-    const floor = sessionStorage.getItem("floorGuess");
-    const room = sessionStorage.getItem("roomGuess");
-    const buildingText = document.getElementById("myBuilding");
-    const floorText = document.getElementById("myFloor");
-    const roomText = document.getElementById("myRoom");
-    buildingText.textContent = "Building: " + building;
-    floorText.textContent = "Floor: " + floor;
-    roomText.textContent = "Room: " + room;
-  </script>
   <script>
     const username = sessionStorage.getItem("username") || "Guest";
     const score = sessionStorage.getItem("bestScore") || 0;
@@ -85,6 +83,17 @@
       sessionStorage.removeItem("bestScore");
       window.location.href = "TandonGeoguessrSignIn.html";
     };
+  </script>
+  <script>
+    const building = sessionStorage.getItem("buildingGuess");
+    const floor = sessionStorage.getItem("floorGuess");
+    const room = sessionStorage.getItem("roomGuess");
+    const buildingText = document.getElementById("myBuilding");
+    const floorText = document.getElementById("myFloor");
+    const roomText = document.getElementById("myRoom");
+    buildingText.textContent = "Building: " + building;
+    floorText.textContent = "Floor: " + floor;
+    roomText.textContent = "Room: " + room;
   </script>
 </body>
 </html>

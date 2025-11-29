@@ -10,16 +10,25 @@
 </head>
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
-    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
-      <div class="flex flex-col items-end gap-2 text-2xl relative">
-        <button id="usernameBtn" class="text-gray-600"></button>
+    <section class="flex flex-row justify-between items-start">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <a href="TandonGeoguessrHome.html" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">Week of [Date1] - [Date2]</p>
+        </div>
       </div>
-      <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
-        <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
-      </div>
-      <div class="flex flex-col items-end gap-2 text-2xl">
-        <p id="myScore" class="text-gray-600"></p>
-      </div>
+    
+      <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start">
+        <div class="flex flex-col items-end gap-2 text-2xl relative">
+          <button id="usernameBtn" class="text-gray-600"></button>
+        </div>
+        <div id="userDropdown" class="hidden absolute right-12 mt-10 w-48 bg-white border rounded shadow-lg z-50">
+          <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-200">Log Out</button>
+        </div>
+        <div class="flex flex-col items-end gap-2 text-2xl">
+          <p id="myScore" class="text-gray-600">[Score]</p>
+        </div>
+      </section>
     </section>
   </header>
 
