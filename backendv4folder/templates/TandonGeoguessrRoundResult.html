@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Tandon Geoguesser Round Result" />
+</head>
+
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <header>
+    <section class="flex flex-row justify-between">
+      <div class="ml-16 flex flex-row items-center">
+        <div>
+          <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">
+            Tandon Geoguesser
+          </a>
+          <p class="mt-4 text-3xl font-semibold text-gray-600">
+            Round {{ current_round }} of {{ max_rounds }}
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 mr-16 flex flex-row items-center">
+        <div class="grid gap-2 grid-rows-2 items-center text-2xl text-gray-600">
+          <p>{{ username }}</p>
+          <p>Best Score: {{ best_score }}</p>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main class="mt-12 mx-auto max-w-7xl flex flex-row gap-16">
+    <!-- Left: picture area (you can wire this up later if you want) -->
+    <section class="ml-16 h-[70vh] flex-1 bg-blue-200 flex items-center justify-center text-xl text-gray-600">
+      [picture]
+    </section>
+
+    <!-- Right: guess + score -->
+    <section class="mr-16 my-12 flex flex-col items-center gap-6">
+      <p class="text-6xl font-bold text-gray-600">Your Guess:</p>
+      <div class="bg-violet-200 text-3xl p-4 border border-violet-400 min-w-[18rem]">
+        <p>Building: {{ guessed_building }}</p>
+        <p>Room: {{ guessed_room }}</p>
+        <p>Floor: {{ guessed_floor }}</p>
+      </div>
+
+      <p class="mt-4 text-6xl font-bold text-gray-600">Your Score:</p>
+      <div class="bg-violet-200 text-3xl p-4 border border-violet-400 min-w-[18rem]">
+        <p>Score this round: {{ round_score }}</p>
+        <p class="mt-2 text-2xl">Total score: {{ total_score }}</p>
+      </div>
+
+      <!-- Optional: show correct answer -->
+      <p class="mt-4 text-4xl font-bold text-gray-600">Correct Location:</p>
+      <div class="bg-violet-100 text-2xl p-3 border border-violet-300 min-w-[18rem]">
+        <p>Building: {{ correct_building }}</p>
+        <p>Room: {{ correct_room }}</p>
+        <p>Floor: {{ correct_floor }}</p>
+      </div>
+
+      <!-- Next round / finish button -->
+      {% if is_final_round %}
+        <a href="{{ url_for('home') }}"
+           class="mt-8 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
+          Finish Game
+        </a>
+      {% else %}
+        <a href="{{ url_for('play') }}"
+           class="mt-8 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
+          Next Round
+        </a>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>

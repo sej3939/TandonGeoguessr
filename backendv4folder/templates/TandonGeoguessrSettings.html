@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    </head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+<h1>Tandon Geoguessr - Settings</h1>
+<p class="text-gray-600"> Logged In As {{ username }}</p>
+<p class="text-gray-600"><a href="{{ url_for('home')}}">HOME</a>|<a href="{{ url_for('logout')}}">LOGOUT</a></p> 
+{% if success %}
+    <p>{{ success }}</p>
+{% endif %}
+{% if  error %}
+    <p>{{ error }}</p>
+{% endif %}
+<form method="POST" action ="{{ url_for('settings') }}">
+    <div>
+        <label for="currentPassword">Current Password:</label>
+        <input 
+        type="password" 
+        id="currentPassword"
+        name ="currentPassword"required>
+
+    </div>
+    <div>
+        <label for="newPassword">New Password:</label>
+        <input 
+        type="password" 
+        id="newPassword"
+        name ="newPassword"required>
+    </div>
+    <button class="text-gray-600" type = "submit">Change Password</button>
+</form>
+<hr>
+<h3>DELETE ACCOUNT</h3>
+<form method="POST" action="{{ url_for('deleteAccount') }}">
+    <label for="deletePassword">Confirm Password:</label>
+    <input 
+        type="password" 
+        id="deletePassword"
+        name="deletePassword"
+        required>
+
+    <button class="text-gray-600" type="submit">Delete My Account</button>
+</form>
+</body>
+</html>
