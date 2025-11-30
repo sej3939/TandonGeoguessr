@@ -168,7 +168,7 @@ def submit_guess():
     cursor.execute("SELECT room, floor, building FROM photo WHERE photo_id = %s",(photo_id,),)
     correct = cursor.fetchone()
 
-    # ---- Partial scoring logic (3 = 1000, 2 = 600, 1 = 300, 0 = 0) ----
+    # scoring logic (3 = 1000, 2 = 600, 1 = 300, 0 = 0)
     building_match = guessed_building == correct["building"]
     floor_match = guessed_floor == correct["floor"]
     room_match = guessed_room == correct["room"]
@@ -248,21 +248,51 @@ def result():
         (session_id,),
     )
     game = cursor.fetchone()
-    cursor.close()
-    db.close()
-
     total_score = game["total_score"] if game else 0
 
-    # current_round was incremented after submit_guess,
-    # so the round we just finished is current_round - 1
+    # Figure out which round we just finished
     current_round = session.get("current_round", 1)
     finished_round = max(current_round - 1, 1)
     is_final_round = finished_round >= MAX_ROUNDS
 
+    # If game is over, update leaderboard_entry
+    if is_final_round:
+        # Get the current leaderboard_id (latest week)
+        cursor.execute(
+            "SELECT leaderboard_id FROM leaderboard ORDER BY end_date DESC LIMIT 1"
+        )
+        lb = cursor.fetchone()
+        current_leaderboard_id = lb["leaderboard_id"] if lb else 1  # fallback 1
+
+        # Does this player already have an entry for this leaderboard?
+        cursor.execute(
+            """SELECT max_score FROM leaderboard_entry WHERE player_id = %s AND leaderboard_id = %s""",
+            (user["player_id"], current_leaderboard_id),
+        )
+        row = cursor.fetchone()
+
+        if row is None:
+            # No existing entry means we need to insert new row
+            cursor.execute(
+                """INSERT INTO leaderboard_entry (leaderboard_id, player_id, max_score, ranking) VALUES (%s, %s, %s, %s)""",
+                (current_leaderboard_id, user["player_id"], total_score, 0),
+            )
+        elif total_score > row["max_score"]:
+            # Existing entry but new score is higher means we need to update
+            cursor.execute(
+                """UPDATE leaderboard_entry SET max_score = %s WHERE player_id = %s AND leaderboard_id = %s""",
+                (total_score, user["player_id"], current_leaderboard_id),
+            )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
     return render_template(
         "TandonGeoguessrRoundResult.html",
         username=user["username"],
-        best_score=user["best_score"],  # 👈 add this
+        best_score=user["best_score"],
         total_score=total_score,
         round_score=session.get("last_round_score", 0),
         current_round=finished_round,
