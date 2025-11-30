@@ -525,7 +525,7 @@ def get_floors():
     floors = [row["floor"] for row in results]
     return jsonify(floors)
 
-# Return rooms for a specific building + floor (optional)
+# Return rooms for a specific building + floor
 @app.route("/api/rooms")
 def get_rooms():
     building = request.args.get("building")
@@ -881,4 +881,5 @@ def signin_redirect():
 
 
 if __name__ == "__main__":
+
     app.run(debug=True)
