@@ -27,7 +27,7 @@
     <!-- Search Bar -->
     <form method="GET" action="{{ url_for('custom_games') }}" class="mb-6">
       <input name="search" type="text" value="{{ request.args.get('search','') }}"
-             placeholder="Search by game name or creator"
+             placeholder="Search by creator"
              class="w-full px-4 py-2 border border-gray-300 rounded-md text-xl" />
       <button type="submit"
               class="mt-3 px-6 py-3 rounded-md bg-violet-800 text-white hover:opacity-95 transition text-xl">
@@ -42,7 +42,6 @@
           <tr class="bg-gray-400 text-left">
             <th class="border-r-4 border-gray-500 px-4 py-2">Select</th>
             <th class="border-r-4 border-gray-500 px-4 py-2">Game ID</th>
-            <th class="border-r-4 border-gray-500 px-4 py-2">Game Name</th>
             <th class="border-r-4 border-gray-500 px-4 py-2">Creator</th>
             <th class="px-4 py-2">Actions</th>
           </tr>
@@ -59,11 +58,6 @@
             <!-- Game ID -->
             <td class="border-r-4 border-gray-500 px-4 py-2">
               {{ game.custom_game_id }}
-            </td>
-
-            <!-- Game Name -->
-            <td class="border-r-4 border-gray-500 px-4 py-2">
-              {{ game.game_name }}
             </td>
 
             <!-- Creator Username -->
@@ -123,11 +117,9 @@
     if (!selected) return;
 
     const gameId = selected.value;
-    // Send the user straight to /play_custom_game/<id>
     window.location.href = `/play_custom_game/${gameId}`;
   });
 
-  // If a game is already selected (back/refresh), enable button
   window.onload = function () {
     if (document.querySelector('input[type=radio][name=selected_game_id]:checked')) {
       playBtn.disabled = false;
