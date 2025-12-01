@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <main class="mt-44 mx-auto max-w-7xl">
+    <section class="flex flex-row justify-center">
+      <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+    </section>
+
+    <section class="mt-12 mx-auto max-w-4xl flex flex-col items-center gap-6">
+      <p class="text-red-500 text-med h-5 {% if not error %}opacity-0{% endif %}" id="loginError">
+        {{ error or 'Incorrect email address or password' }}
+      </p>
+
+      <form method="POST" action="{{ url_for('signin') }}" class="flex flex-col items-center gap-6">
+        <p class="text-4xl font-semibold text-gray-600">Email Address:</p>
+        <input
+          id="emailInput"
+          name="email"
+          type="text"
+          class="border border-gray-300 rounded-lg p-2 w-64"
+          placeholder="Type here..."
+          required
+        >
+
+        <p class="text-4xl font-semibold text-gray-600">Password:</p>
+        <input
+          id="passwordInput"
+          name="password"
+          type="password"
+          class="border border-gray-300 rounded-lg p-2 w-64"
+          placeholder="••••••"
+          required
+        >
+
+        <button
+          type="submit"
+          class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition"
+          id="loginBtn"
+        >
+          Login
+        </button>
+      </form>
+
+      <p class="text-center text-med text-gray-600">
+        Don't have an account?
+        <a href="{{ url_for('signup') }}" class="text-med text-blue-600 hover:underline font-semibold">
+          Sign up here!
+        </a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>

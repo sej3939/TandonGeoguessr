@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirm Custom Game - Tandon Geoguesser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <main class="mt-44 mx-auto max-w-7xl">
+    <section class="flex flex-row justify-center">
+      <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">
+        Tandon Geoguesser
+      </a>
+    </section>
+    <section class="mt-12 mx-auto max-w-4xl text-center">
+      <h2 class="mb-8 text-4xl font-semibold text-gray-700">Confirm Custom Game Setup</h2>
+      <form method="post">
+        <table class="min-w-full border-4 border-gray-500 text-xl mb-10">
+          <thead>
+            <tr class="bg-gray-400 text-left">
+              <th class="border-r-4 border-gray-500 px-4 py-2">Preview</th>
+              <th class="border-r-4 border-gray-500 px-4 py-2">Building</th>
+              <th class="border-r-4 border-gray-500 px-4 py-2">Room</th>
+              <th class="border-r-4 border-gray-500 px-4 py-2">Floor</th>
+              <th class="px-4 py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for photo in photos %}
+            <tr class="{% if loop.index % 2 == 0 %}bg-gray-200{% else %}bg-gray-100{% endif %}">
+              <td class="border-r-4 border-gray-500 px-4 py-2">
+                {% if photo.photo_data %}
+                  <img src="{{ photo.photo_data }}" style="max-height:60px; max-width:80px;" alt="Photo preview" />
+                {% else %}
+                  N/A
+                {% endif %}
+              </td>
+              <td class="border-r-4 border-gray-500 px-4 py-2">{{ photo.building }}</td>
+              <td class="border-r-4 border-gray-500 px-4 py-2">{{ photo.room }}</td>
+              <td class="border-r-4 border-gray-500 px-4 py-2">{{ photo.floor }}</td>
+              <td class="px-4 py-2">{{ photo.upload_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="flex flex-row gap-8 justify-center">
+          <a href="{{ url_for('photo_browser') }}" class="px-8 py-4 rounded-md bg-gray-400 text-white hover:opacity-95 transition text-2xl">Back</a>
+          <button type="submit" class="px-10 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition text-2xl">Confirm &amp; Create</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

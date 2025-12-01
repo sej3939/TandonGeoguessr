@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+
+  <header>
+    <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-center">
+      <div class="flex flex-col items-end gap-2 text-2xl">
+        <p class="text-gray-600">{{ username }}</p>
+      </div>
+      <div class="flex flex-col items-end gap-2 text-2xl">
+        <p class="text-gray-600">Best Score: {{ best_score }}</p>
+      </div>
+    </section>
+  </header>
+
+  <main class="mt-12 mx-auto max-w-7xl">
+
+    <section class="flex flex-row justify-center">
+      <div class="text-center">
+        <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+        <p class="mt-6 text-4xl font-semibold text-gray-600">Week of {{ date1 }} - {{ date2 }}</p>
+      </div>
+    </section>
+
+    <section class="mt-24 mx-auto max-w-6xl flex justify-center gap-8 flex-wrap text-3xl">
+
+      <a href="{{ url_for('play') }}"
+         class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition">
+        Play Now!
+      </a>
+
+      <a href="{{ url_for('photo_browser') }}"
+         class="px-8 py-4 rounded-md bg-blue-700 text-white hover:opacity-95 transition">
+        Create Custom Game
+      </a>
+
+      <a href="{{ url_for('custom_games') }}"
+         class="px-8 py-4 rounded-md bg-violet-900 text-white hover:opacity-95 transition">
+        Play Custom Game
+      </a>
+
+      <a href="{{ url_for('leaderboard') }}"
+         class="px-8 py-4 rounded-md bg-violet-800 text-white hover:opacity-95 transition">
+        Leaderboard
+      </a>
+
+      <a href="{{ url_for('settings') }}"
+         class="px-8 py-4 rounded-md bg-gray-700 text-white hover:opacity-95 transition">
+        Settings
+      </a>
+
+    </section>
+
+  </main>
+
+</body>
+</html>

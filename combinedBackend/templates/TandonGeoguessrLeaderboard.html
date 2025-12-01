@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tandon Geoguesser</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
+  <header class="flex justify-between items-start mt-8 mx-16">
+    <div class="text-xl">
+      <a href="{{ url_for('home') }}" class="text-blue-600 hover:underline mr-4">Home</a>
+    </div>
+
+    <section class="grid gap-2 grid-rows-2 text-right">
+      <p class="text-gray-600 text-2xl">{{ username }}</p>
+      <p class="text-gray-600 text-2xl">Best Score: {{ best_score }}</p>
+    </section>
+  </header>
+
+  <main class="mt-12 mx-auto max-w-7xl">
+    <section class="flex flex-col items-center gap-4">
+      <p class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</p>
+
+      <p class="text-3xl font-semibold text-gray-600">
+        Week of {{ date1 }} - {{ date2 }}
+      </p>
+
+      <form method="GET" action="{{ url_for('leaderboard') }}" class="mt-4">
+        <label for="weekSelect" class="mr-2 text-xl text-gray-700">Select Week:</label>
+        <select
+          id="weekSelect"
+          name="leaderboard_id"
+          class="border border-gray-400 rounded px-3 py-1 text-lg"
+          onchange="this.form.submit()"
+        >
+          {% for w in weeks %}
+            <option value="{{ w.leaderboard_id }}"
+              {% if w.leaderboard_id == selected_week %}
+                selected
+              {% endif %}
+            >
+              {{ w.start_date }} - {{ w.end_date }}
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+    </section>
+
+    <section class="mt-10 mx-auto max-w-4xl">
+      <table class="min-w-full border-4 border-gray-500 text-3xl">
+        <thead>
+          <tr class="bg-gray-400 text-left">
+            <th class="border-r-4 border-gray-500 px-4 py-2">Name</th>
+            <th class="px-4 py-2">Points</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in data %}
+          <tr class="{% if loop.index % 2 == 0 %}bg-gray-200{% else %}bg-gray-100{% endif %}">
+            <td class="border-r-4 border-gray-500 px-4 py-2">{{ row.username }}</td>
+            <td class="px-4 py-2">{{ row.max_score }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+      </table>
+    </section>
+
+  </main>
+
+</body>
+</html>
