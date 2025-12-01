@@ -827,23 +827,26 @@ def custom_games():
             search_id = int(search)
         except ValueError:
             search_id = None
+
         if search_id:
             cursor.execute(
-                "SELECT cg.custom_game_id, p.username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id WHERE cg.custom_game_id = %s OR p.username LIKE %s ORDER BY cg.custom_game_id DESC",
+                "SELECT cg.custom_game_id, p.username AS creator_username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id WHERE cg.custom_game_id = %s OR p.username LIKE %s ORDER BY cg.custom_game_id DESC",
                 (search_id, f"%{search}%")
             )
         else:
             cursor.execute(
-                "SELECT cg.custom_game_id, p.username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id WHERE p.username LIKE %s ORDER BY cg.custom_game_id DESC",
+                "SELECT cg.custom_game_id, p.username AS creator_username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id WHERE p.username LIKE %s ORDER BY cg.custom_game_id DESC",
                 (f"%{search}%",)
             )
     else:
         cursor.execute(
-            "SELECT cg.custom_game_id, p.username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id ORDER BY cg.custom_game_id DESC"
+            "SELECT cg.custom_game_id, p.username AS creator_username FROM custom_game cg JOIN player p ON cg.player_id = p.player_id ORDER BY cg.custom_game_id DESC"
         )
+
     games = cursor.fetchall()
     cursor.close()
     db.close()
+    
     return render_template(
         "CustomGameSearch.html",
         games=games,
@@ -1005,4 +1008,5 @@ def settings_redirect():
 
 
 if __name__ == "__main__":
+
     app.run(debug=True)
