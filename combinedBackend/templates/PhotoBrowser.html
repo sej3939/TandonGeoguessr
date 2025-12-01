@@ -31,7 +31,6 @@
           <thead>
             <tr class="bg-gray-400 text-left">
               <th class="border-r-4 border-gray-500 px-4 py-2">Select</th>
-              <th class="border-r-4 border-gray-500 px-4 py-2">Preview</th>
               <th class="border-r-4 border-gray-500 px-4 py-2">Building</th>
               <th class="border-r-4 border-gray-500 px-4 py-2">Room</th>
               <th class="border-r-4 border-gray-500 px-4 py-2">Floor</th>
@@ -44,12 +43,8 @@
               <td class="border-r-4 border-gray-500 px-4 py-2">
                 <input type="checkbox" name="selected_photos" value="{{ photo.photo_id }}">
               </td>
-              <td class="border-r-4 border-gray-500 px-4 py-2">
-                {% if photo.photo_data %}
-                  <img src="{{ photo.photo_data }}" style="max-height:60px; max-width:80px;" alt="Photo preview" />
-                {% else %}
-                  N/A
-                {% endif %}
+
+                
               </td>
               <td class="border-r-4 border-gray-500 px-4 py-2">{{ photo.building }}</td>
               <td class="border-r-4 border-gray-500 px-4 py-2">{{ photo.room }}</td>
