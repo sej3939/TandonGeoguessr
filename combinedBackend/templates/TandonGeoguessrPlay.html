@@ -43,9 +43,10 @@
     <!-- PHOTO DISPLAY -->
     <section class="mx-12 h-[50vh] flex-1 bg-blue-200 text-center flex items-center justify-center">
       {% if photo %}
-        <img src="{{ photo.photo_data }}" class="max-h-full max-w-full" />
+  	<img src="{{ url_for('static', filename=photo.photo_data) }}"
+       		class="max-h-full max-w-full" />
       {% else %}
-        <p>[No Photo Loaded]</p>
+  	<p>[No Photo Loaded]</p>
       {% endif %}
     </section>
 
