@@ -498,7 +498,7 @@ def submit_guess():
 
     # Correct answer
     cursor.execute(
-        "SELECT room, floor, building FROM photo WHERE photo_id = %s",
+        "SELECT room, floor, building, photo_data FROM photo WHERE photo_id = %s",
         (photo_id,),
     )
     correct = cursor.fetchone()
@@ -579,6 +579,7 @@ def submit_guess():
         session["last_correct_building"] = correct["building"]
         session["last_correct_floor"] = correct["floor"]
         session["last_correct_room"] = correct["room"]
+        session["last_photo_path"] = correct["photo_data"]
 
     # Next round
     session["current_round"] = current_round + 1
@@ -706,6 +707,8 @@ def result():
     if mode == "custom" and is_final_round and custom_game_id is not None:
         update_custom_leaderboard(custom_game_id, user["player_id"], total_score)
 
+    photo_path = session.get("last_photo_path")
+
     return render_template(
         "TandonGeoguessrRoundResult.html",
         username=user["username"],
@@ -723,6 +726,7 @@ def result():
         correct_building=session.get("last_correct_building"),
         correct_floor=session.get("last_correct_floor"),
         correct_room=session.get("last_correct_room"),
+        photo_path=photo_path,
     )
 
 

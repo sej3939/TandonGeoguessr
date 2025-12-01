@@ -33,9 +33,15 @@
 
   <main class="mt-12 mx-auto max-w-7xl flex flex-row gap-16">
     <!-- Left: picture area (you can wire this up later if you want) -->
-    <section class="ml-16 h-[70vh] flex-1 bg-blue-200 flex items-center justify-center text-xl text-gray-600">
-      [picture]
-    </section>
+    <section class="ml-16 h-[70vh] flex-1 bg-blue-200 flex items-center justify-center">
+  	{% if photo_path %}
+    		<img src="{{ url_for('static', filename=photo_path) }}"
+         	     class="max-h-full max-w-full object-contain rounded-lg shadow-lg"
+         	     alt="Location image">
+  	{% else %}
+    		<span class="text-xl text-gray-600">No image available</span>
+  	{% endif %}
+</section>
 
     <!-- Right: guess + score -->
     <section class="mr-16 my-12 flex flex-col items-center gap-6">
